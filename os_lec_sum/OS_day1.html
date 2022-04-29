@@ -1,0 +1,694 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>시스템 보안</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="6e0ab7ef-edf0-4286-9b0c-fd04d81f1146" class="page serif"><header><h1 class="page-title">시스템 보안</h1></header><div class="page-body"><h1 id="f91220b2-dd44-4fa4-be1a-e767a73aa961" class="">01, 02 시스템</h1><p id="de8bfbd2-7451-4ac0-b992-a2f6e62b87e5" class=""><a href="https://slid.cc/docs/f5ad9094c47a425e8cf6d396f5a329de">→ 슬리드로 보기</a></p><hr id="71f2055d-79aa-4628-8641-dce3ad6723a9"/><p id="3e8b33d1-934d-43a9-9a76-ed29bcd65eb3" class="">
+</p><p id="817465f7-e171-4463-8244-717c8d779888" class="">
+</p><ol type="1" id="bb09bfae-c982-41f4-a7a5-144fa8550a32" class="numbered-list" start="1"><li><strong>운영체제의 역할과 목적</strong><ul id="748fb649-acb7-4126-bc53-e16cc8a92c26" class="bulleted-list"><li style="list-style-type:disc"><strong>운영체제의 개념 및 역할</strong><ul id="c60d9686-ded4-40bf-8dc1-e6dd2f911c51" class="bulleted-list"><li style="list-style-type:circle">사용자가 컴퓨터 시스템을 손쉽게 사용하도록 하며,</li></ul><ul id="cf59b5cb-72f1-47f9-b716-8ec811f013ee" class="bulleted-list"><li style="list-style-type:circle">시스템 자원을 효율적으로 관리 할 수 있도록 하는 프로그램 집함.(William Stallings)</li></ul><ul id="3f1e5e79-9dab-4c75-8e24-d4a9bae314b7" class="bulleted-list"><li style="list-style-type:circle">컴퓨터 하드웨어와 응용 프로그램 간의 I/F (InterFace).</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b9deac08-ee7c-48f8-8608-03c41a340277"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Cloud : 정보를 자신의 컴퓨터가 아닌 클라우드에 연결된 다른 컴퓨터로 처리하는 기술을 의미한다.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="796690a3-57e6-439f-9607-7d20016361db"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">On-premise : 소프트웨어 등 솔루션을 원격 환경이 아닌 자체적으로 보유한 전산실 서버에 직접 설치해 운영하는 방식.</div></figure><blockquote id="0f99a063-c5fa-4f55-bf97-bd9182774be3" class="">Cloud와 On-premise 는 서로 반대 개념이라 할 수 있다.</blockquote></li></ul><ul id="71169a9c-b8f0-4019-b7b4-4047a0137744" class="bulleted-list"><li style="list-style-type:disc"><strong>운영체제의 목적</strong><ul id="e9e9c1a8-1d18-488b-baf1-2b33b71a7980" class="bulleted-list"><li style="list-style-type:circle"><strong>편리성</strong><ul id="659c3ef4-8511-4f5f-a86b-8e191ffb5cef" class="bulleted-list"><li style="list-style-type:square">사용자가 프로그램을 개발하고 사용하는데에 보다 편리한 환경 제공(PC GUI 환경.).  —&gt; 생산성 기대</li></ul></li></ul><ul id="f85261a1-9030-4bf0-8c29-50cfd11a7214" class="bulleted-list"><li style="list-style-type:circle"><strong>효율성</strong><ul id="c63b2020-a641-4da8-ad4f-00253f3eed5a" class="bulleted-list"><li style="list-style-type:square">한정된 자원을 효율적으로 사용하기 위해 각 프로그램을 유기적으로 결합하여 시스템 성능을 향상시킴.<ul id="f9959f9b-188b-4f39-bc4a-d8280102202c" class="bulleted-list"><li style="list-style-type:disc"><strong>처리 능력 향상 :</strong><ul id="ae8d443d-213b-4c98-a75a-553885bf1db9" class="bulleted-list"><li style="list-style-type:circle">단위 시간 내에 많은 양의 일을 처리.</li></ul><ul id="9e8bcd02-ac9a-4939-8dca-000e7bac4b0a" class="bulleted-list"><li style="list-style-type:circle">ex) 멀티 프로그래밍, 멀티 쓰레딩</li></ul></li></ul><ul id="1e6db6d8-9a30-4064-80b7-0e9a68a65948" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-orange_background"><strong>응답시간 단축 </strong></mark><strong>: </strong><ul id="a348acb8-4947-490b-ab0d-63e5422afafe" class="bulleted-list"><li style="list-style-type:circle">사용자가 작업을 의뢰한 후, 그 결과를 최단시간에 획득.</li></ul><ul id="395825bf-7d1a-43b7-be6e-2bba6a90aba5" class="bulleted-list"><li style="list-style-type:circle">ex) 온라인 실시간, 시분할 처리 개념, 다중 처리 개념</li></ul></li></ul><ul id="bbc5a0a0-6d75-4f40-b786-8a2cbbbf4043" class="bulleted-list"><li style="list-style-type:disc"><strong>신뢰도 향상 : </strong><ul id="216dc82d-0d75-4c61-a838-25acd7509d92" class="bulleted-list"><li style="list-style-type:circle">하드웨어, 소프트웨어의 성공적인 기능 수행.</li></ul><ul id="d9dd3a45-5ff7-408e-a41d-9a72a8548d63" class="bulleted-list"><li style="list-style-type:circle">ex) 시스템이 정확하게 작동되는 정도.</li></ul></li></ul><ul id="d148ef8c-6678-467b-ab89-be98b51c3c3a" class="bulleted-list"><li style="list-style-type:disc"><strong>사용가능도(가동률) 향상 :</strong><ul id="18db6b0a-bbf1-436a-b96d-2e1d5039005c" class="bulleted-list"><li style="list-style-type:circle">사용자가 시스템 사용 시 가장 신속하게 사용 혹은 사용 빈도가 높음.</li></ul><ul id="15daae9b-24d0-48da-9f05-babf4d49ea64" class="bulleted-list"><li style="list-style-type:circle">ex) 부품 한개가 고장났음에도 사용이 가능하다면 <mark class="highlight-teal">사용가능도</mark>가 높은 경우이다.</li></ul><ul id="0f702582-4e8f-4f15-a7c8-743f118e4819" class="bulleted-list"><li style="list-style-type:circle">ex) 다중 사용자 기반인 경우, 여러 사용자가 신속하게 사용가능한가 / 자원들이 쉬지 않고 사용가능한가.</li></ul></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f87486a3-3bc1-4b08-8472-78016f5ace12"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">MMI(Man - Machine Interface) : 사람과 시스템 사이에서 의사소통을 할 수 있도록  만들어진 매개체를 뜻한다.</div></figure></li></ul><p id="b955f2b6-ac6e-4f81-9b7d-255451692f29" class="">
+</p><hr id="201313f4-410e-491e-bed2-d47ebe6beb02"/><p id="b0343c01-1ee0-48d5-803b-eb36035b3fcb" class="">
+</p><p id="e2f2b203-e6f8-4e6a-83ec-267dff3c360f" class="">
+</p></li></ul></li></ul></li></ol><ol type="1" id="ebad3ddf-4ca2-4d06-a08c-578d3e2ab6c3" class="numbered-list" start="2"><li><strong>운영체제의 기능과 구조</strong><ul id="b15cf6ca-d430-46e6-8ad6-906a8b7bd297" class="bulleted-list"><li style="list-style-type:disc"><strong>운영체제의 기능</strong><ul id="a5b29e9b-6ee7-40da-974c-986a96ee3678" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-purple">입출력 장치 관리 :</mark></strong><ul id="f541be85-5f42-4c41-bde8-177059d871e1" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-blue">I/O operation, 프로그램 생성 및 실행.</mark></li></ul></li></ul><ul id="e3dc0a89-99a6-433f-b244-aaac17cac0c0" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-purple">시스템 자원 관리 :</mark></strong><ul id="dc055eb7-cbf8-4a12-8441-bab032ba9f7e" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-blue">메모리와 프로세스를 제어하여 프로그램에 CPU, 램, 데이터버스  등의 시스템 자원 할당.</mark></li></ul></li></ul><ul id="d20691e2-c5b7-4bc8-9908-0f10d25ae635" class="bulleted-list"><li style="list-style-type:circle"><strong><mark class="highlight-purple">에러 검출과 조치</mark></strong><ul id="af4a658a-bf0d-4826-938e-67f7319f4e4f" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-blue">에러 발생에 따른 비정상 동작 조치.</mark></li></ul><ul id="5971da9d-38bb-43e1-96b6-e441a326c4a4" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-blue">오류 프로세스 탐지 및 제거, 잘못 할당된 메모리 초기화 및 통지.</mark></li></ul></li></ul><ul id="ab9455d8-1e14-45bc-b4c2-f38e2ee1ce8a" class="bulleted-list"><li style="list-style-type:circle"><strong>시스템 성능 감시</strong></li></ul><ul id="0575f244-d4ba-4cf5-8351-b85a84d15ebe" class="bulleted-list"><li style="list-style-type:circle"><strong>파일 시스템 조작</strong></li></ul><ul id="a5d3f74b-e187-4995-8c9b-b5cb6b3d4a62" class="bulleted-list"><li style="list-style-type:circle"><strong>네트워크 관리 </strong></li></ul><ul id="6255b77a-ce9e-4b92-ad78-f20ef99a0293" class="bulleted-list"><li style="list-style-type:circle"><strong>계정 관리</strong></li></ul><ul id="6435a560-0068-4233-8ebb-a4919031d256" class="bulleted-list"><li style="list-style-type:circle"><strong>보호</strong><ol type="1" id="7d290839-5509-4110-8784-825923961505" class="numbered-list" start="1"><li><code>자원 관리 :</code><ol type="a" id="f981147b-44cb-4811-bc94-e536915d9183" class="numbered-list" start="1"><li><code>메모리 관리(메인 메모리, 보조기억장치), 프로세스 관리, 주변장치 관리, 파일(데이터) 관리.</code></li></ol></li></ol><ol type="1" id="75a4bd6a-6176-43cc-946a-46dd4b5390f7" class="numbered-list" start="2"><li><code>시스템 관리 :</code><ol type="a" id="373984ad-c619-40b4-8c1b-e6613c386905" class="numbered-list" start="1"><li><code>시스템 보호(사용자 권한 부여), 네트워크 관리, command interpreter</code></li></ol></li></ol></li></ul></li></ul><ul id="d61c45f8-164e-4e49-bec4-2d78bd115795" class="bulleted-list"><li style="list-style-type:disc"><strong>운영체제의 구조</strong><ul id="bfe4749b-32ff-46c3-911f-f6995ea3defb" class="bulleted-list"><li style="list-style-type:circle"><strong>5계층 : 파일 관리</strong><ul id="12885887-e58e-4b81-8755-f43709b52e31" class="bulleted-list"><li style="list-style-type:square">파일의 생성, 소멸, 파일 열고 닫기, 유지, 관리.</li></ul></li></ul><ul id="ed83ddc8-780f-48db-9aaa-627b17695bb7" class="bulleted-list"><li style="list-style-type:circle"><strong>4계층 : 주변장치 관리(입출력 관리)</strong><ul id="f5d77a86-3b4a-470a-85a1-629446f95cb4" class="bulleted-list"><li style="list-style-type:square">주변장치 상태파악, 입출력 장치 스케줄링(키보드, 마우스, 프린터).</li></ul></li></ul><ul id="881b464a-4b15-405b-9257-deb4419eeb50" class="bulleted-list"><li style="list-style-type:circle"><strong>3계층 : 프로세스 관리(상위 단계)</strong><ul id="41568a9b-edad-4ac5-8201-a73d540932d9" class="bulleted-list"><li style="list-style-type:square">프로세스 생성, 제거, 메시지 전달, 시작, 정지.</li></ul></li></ul><ul id="4c7b592d-0449-4610-adea-d2a12827dcb9" class="bulleted-list"><li style="list-style-type:circle"><strong>2계층 : 메모리 관리</strong><ul id="73b7b223-c318-439d-b3ba-492085c2e262" class="bulleted-list"><li style="list-style-type:square">메모리(RAM, ROM)의 할당 , 회수 기능.</li></ul></li></ul><ul id="cba57d03-cbf5-4f00-b4d8-d6fb0de2c788" class="bulleted-list"><li style="list-style-type:circle"><strong>1계층 : 프로세스 관리(하위 단계)</strong><ul id="9d9d7f01-5d6e-4098-8215-d93948a9c5bb" class="bulleted-list"><li style="list-style-type:square">동기화 및 프로세스 스케줄링.</li></ul></li></ul><ul id="06fc035b-fedd-4db5-a9ee-2db33f93acfd" class="bulleted-list"><li style="list-style-type:circle"><strong>하드웨어</strong></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="55788739-c790-4565-93a1-a2b93d8ec3ad"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">HAL(Hardware Abstraction Layer) : 하드웨어와 1계층 사이에 존재하며,  </div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="06e55e02-623a-485b-8251-991e9a2b5bfa"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">특정 플랫폼의 구체적인 부분과 <a href="https://ko.wikipedia.org/wiki/%EC%BB%B4%ED%93%A8%ED%84%B0_%ED%95%98%EB%93%9C%EC%9B%A8%EC%96%B4">하드웨어</a>의 자원을 직접 접근을 흉내내는 <a href="https://ko.wikipedia.org/wiki/%EC%BB%B4%ED%93%A8%ED%84%B0_%EC%86%8C%ED%94%84%ED%8A%B8%EC%9B%A8%EC%96%B4">소프트웨어</a>들의 집합이다.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="6680473b-bf45-48d4-b0ec-4d1b6b30dfd9"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">하드웨어 추상화는 장치 독립적인 프로그램을 작성하도록 하고 <a href="https://ko.wikipedia.org/wiki/%EC%9A%B4%EC%98%81_%EC%B2%B4%EC%A0%9C">운영 체제</a>의 하드웨어 호출을 무시함으로써 고성능의 응용 프로그램 작성을 허용한다.</div></figure><p id="aafba2d9-9bbc-4458-8f63-802e0648cb9f" class="">
+</p></li></ul><ul id="6ecd2dbe-69b1-4cdc-b03e-4df451fd1063" class="bulleted-list"><li style="list-style-type:disc"><strong>커널</strong><ul id="0d4402a8-9728-42db-a2ff-4b37f4c98b39" class="bulleted-list"><li style="list-style-type:circle">하드웨어 특성으로부터 프로그램들을 격리시키고, 하드웨어와 직접적으로 상호작용함으로서 프로그램에 일관적인 서비스 제공.</li></ul><ul id="3a155917-a02c-4aa2-8bda-8651be0a2c07" class="bulleted-list"><li style="list-style-type:circle">핵심 기능 : <ul id="f3113452-f76c-400c-843d-b97c3cb76853" class="bulleted-list"><li style="list-style-type:square">프로세스, 파일 관리</li></ul><ul id="858c899e-3c99-4c99-a049-0a7cfc2e375e" class="bulleted-list"><li style="list-style-type:square">입출력 장치 관리</li></ul><ul id="5a9fb78c-c879-4661-b2e1-db979a6d859e" class="bulleted-list"><li style="list-style-type:square">메모리 관리</li></ul><ul id="9f84899b-5c06-4e4f-a066-82132202f1a3" class="bulleted-list"><li style="list-style-type:square">시스템 호출 인터페이스</li></ul></li></ul><ul id="1461df7f-29f5-47e4-81b5-d46597a883b3" class="bulleted-list"><li style="list-style-type:circle">부팅 시 가장 먼저 실행에 필요한 다양한 서비스를 제공다양한 서비스를 제공.</li></ul><ul id="8bb8e5ed-9ef4-4d7d-aa25-9840e206ed77" class="bulleted-list"><li style="list-style-type:circle">실행 프로세스를 스케줄링하는 역할.</li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="b82270a7-15c7-4c9f-89fb-636074033380"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><mark class="highlight-orange"><strong>Interrupt </strong></mark>: 지금 하던일을 멈추었을 때, 다음 작업으로 무엇을 할지 결정하는 역할.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="f1a75182-16e5-40f2-a3bf-483eb95c8b09"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Iterrupt 가 있기에 멀티태스킹이 가능하다.</div></figure><p id="e5402364-82c1-4ec9-abae-8531e85ac706" class="">
+</p></li></ul><ul id="e3eb5329-bd14-4105-853f-7e68d04a4f44" class="bulleted-list"><li style="list-style-type:disc"><strong>프로세스 관리</strong></li></ul><ul id="c99bc33b-a9a5-410c-82d9-561c21a64191" class="bulleted-list"><li style="list-style-type:disc"><strong>메모리 관리</strong></li></ul><ul id="b1f95b0a-6812-4e8a-9a52-8eb815937667" class="bulleted-list"><li style="list-style-type:disc"><strong>주기억장치 관리</strong></li></ul><ul id="95fa1c4e-94e4-4fb8-910d-d15cd6c76f4d" class="bulleted-list"><li style="list-style-type:disc"><strong>보조기억장치 관리</strong></li></ul><ol type="1" id="568fe6e5-4626-4367-b440-060f49c63d73" class="numbered-list" start="1"><li><code><strong>ROM : Read Only Memory</strong></code><ol type="a" id="6081ac5d-213f-4225-a4cb-164fe81c7bcd" class="numbered-list" start="1"><li><code>기억된 메모리를 바꿀수 없고 </code><code><strong>읽기</strong></code><code>만 가능(반영구적).</code></li></ol><ol type="a" id="9918eb74-1042-4c6d-9f63-3cf89b1d6c34" class="numbered-list" start="2"><li><code><strong>masked ROM </strong></code><code>: 제조 과정에서 이미 내용을 기억시킨 메모리.</code></li></ol><ol type="a" id="c3869010-520c-47d7-bd93-003a19493571" class="numbered-list" start="3"><li><code><strong>PROM </strong></code><code>: 1회에 한해서 새로운 내용을 기록할 수 있는 롬.</code></li></ol><ol type="a" id="e93c0199-b840-45a0-b549-6b3614c764e5" class="numbered-list" start="4"><li><code><strong>EPROM</strong></code><code> : 필요할 때 기억된 내용을 지우고 다른 내용을 기록할 수 있는 롬.</code></li></ol></li></ol><ol type="1" id="3d500e34-5adc-4ecd-aaa6-3c2489af953d" class="numbered-list" start="2"><li><code><strong>RAM : Random Access Memory</strong></code><ol type="a" id="8da7c3d5-8294-4706-96e5-66f80702e3f5" class="numbered-list" start="1"><li><code>읽고 쓰기가 가능한 주기억 장치.</code></li></ol><ol type="a" id="d9683c8e-fb74-4091-9999-43ff02dcb648" class="numbered-list" start="2"><li><code>휘발성 메모리</code></li></ol><ol type="a" id="25a1b884-a5ce-4452-98ee-82e43d1742a4" class="numbered-list" start="3"><li><code><strong>DRAM</strong></code><code> : </code><code><a href="https://ko.wikipedia.org/wiki/%EC%A0%95%EB%B3%B4">정보</a></code><code>를  </code><code><a href="https://ko.wikipedia.org/wiki/%EC%B6%95%EC%A0%84%EA%B8%B0">축전기</a></code><code>에 저장하는 </code><code><a href="https://ko.wikipedia.org/wiki/%EA%B8%B0%EC%96%B5_%EC%9E%A5%EC%B9%98">기억 장치</a></code><code>이지만  결국 축전기가 전자를 누전하므로 기억된 정보를 잃게 되는 메모리.</code></li></ol><ol type="a" id="4c349646-89d0-45a3-adeb-2d799d748ca2" class="numbered-list" start="4"><li><code><strong>SRAM</strong></code><code> : 기억 장치에 전원이 공급되는 한 그 내용이 계속 보존되는 메모리.</code></li></ol><p id="a74f09f6-8d1f-4247-87b7-a89cbc605935" class="">
+</p></li></ol><ul id="dd084b1d-8d9d-4937-af19-c90b211291c6" class="bulleted-list"><li style="list-style-type:disc"><strong>주변 장치 관리(입출력 관리)</strong><ul id="59ebe8e6-487d-4c5b-80c3-3a5df41b066d" class="bulleted-list"><li style="list-style-type:circle"><strong>장치 구동기(Device Driver)</strong><ul id="5358cbd2-bb0e-42f7-9133-e24e8a8e6a2e" class="bulleted-list"><li style="list-style-type:square">운영체제와 응용프로그램 및 하드웨어 간의 인터페이스 담당.</li></ul><ul id="151415e1-65db-4477-a42b-e9a15fc9bbfc" class="bulleted-list"><li style="list-style-type:square">장치 제어 명령어 생성 및 수행 여부 점검.</li></ul></li></ul><ul id="5dcdd884-6d08-4e96-b3d2-eecbbcdb7516" class="bulleted-list"><li style="list-style-type:circle"><strong>데이터의 입출력 방식</strong><ul id="648c0ce6-c221-4f85-8aa1-80afc8a2ddcf" class="bulleted-list"><li style="list-style-type:square"><strong>프로그램에 의한 입출력</strong><ul id="bdd4fc12-12a7-42ed-b76a-05eb2c72f67b" class="bulleted-list"><li style="list-style-type:disc">데이터의 입출력 동작이 CPU가 수행하는 프로그램 I/O 명령에 의해 수행.</li></ul><ul id="f6375d5b-afec-412e-ad4a-a1c9cbb8a75b" class="bulleted-list"><li style="list-style-type:disc">CPU 가 주변장치의 상태를 계속 감시해야 함.</li></ul></li></ul><ul id="adb47bb2-1dd5-4fd6-ba9a-7aa91b70d2ee" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-orange"><strong>인터럽트</strong></mark><ul id="d25ebb80-ce74-430d-8c90-0c90bb6d9591" class="bulleted-list"><li style="list-style-type:disc">입출력 장치가 데이터를 전송할 준비가 되면 CPU에 인터럽트를 발생.</li></ul></li></ul><ul id="1892bec4-1bc6-48b8-a576-8ae47c8d00c2" class="bulleted-list"><li style="list-style-type:square"><strong>DMA(Direct Memory Access)</strong><ul id="eec3c061-4e1c-4b07-9616-6496cb9f22a4" class="bulleted-list"><li style="list-style-type:disc">CPU를 거치지 않고, 주변장치와 메모리 사이에 직접 데이터를 전달하도록 제어하는 인터페이스 방식.</li></ul><ol type="1" id="5ea4f3f8-ccfb-4e72-a3d2-cecf3173b0a6" class="numbered-list" start="1"><li><code><strong>직접 입/출력(Direct I/O) </strong></code><code>:</code><ol type="a" id="c7f7e37f-d030-4aa5-943d-e70eca62f0cd" class="numbered-list" start="1"><li><code>입력 데이터 : 장치제어기 → cpu레지스터 → 주기억장치 전송.</code></li></ol><ol type="a" id="c013d79a-a3eb-4969-b4cc-0178c494c2a9" class="numbered-list" start="2"><li><code>출력 데이터 : 주기억장치 → cpu레지스터 → 장치제어기 전송.</code></li></ol><ol type="a" id="0e8f355d-136e-4a7f-bf47-6212ad5a73a5" class="numbered-list" start="3"><li><code>ex) Polling 방식.</code></li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="9cc793fe-3a6f-4bc5-8816-370bfed7dd20"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">Polling : 하나의 장치가  다른 장치의 상태를 주기적으로 검사하여 일정한 조건을 만족할 때 송수신 등의 자료처리를 하는 방식을 말한다.</div></figure></li></ol><ol type="1" id="c9e83d99-e1f8-456a-8c3a-8ed9a91c45b6" class="numbered-list" start="2"><li><code><strong>간접 입/출력(Indirect I/O) :</strong></code><ol type="a" id="8f0008c3-dd79-4a8d-be5e-d63f9dc0826b" class="numbered-list" start="1"><li><code>CPU가 직접 입/출력을 담당하지 않고 “</code><mark class="highlight-orange"><span style="border-bottom:0.05em solid"><code><strong>인터럽트</strong></code></span></mark><code>”를 사용하여 전용 입/출력 프로세서인 DMA나 Channel을 사용하는 방식.</code></li></ol><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="93690845-c1c0-476d-b344-5f8a7c933d58"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">I/O Channel : 가장 완벽한 입/출력 방식.<p id="22e9acfb-61be-4007-8415-e0d5be56e0ea" class=""> 1. 선택(Selector)</p><ol type="1" id="c5b04eed-bbc7-451a-85fd-648a141840ec" class="numbered-list" start="2"><li>멀티 플렉서(Multi plexer)</li></ol><ol type="1" id="f546a9b7-3800-443f-8152-b87b9d642c33" class="numbered-list" start="3"><li>블록 멀티 플렉서(Block multi plexer)</li></ol></div></figure></li></ol></li></ul></li></ul><p id="bb60217d-be40-4e56-ae90-a38bb4c47719" class="">
+</p><ul id="a08b087a-a3d4-45e1-b275-dbad357e679c" class="bulleted-list"><li style="list-style-type:circle"><strong>버퍼링 &amp; 스풀링</strong><ul id="a8868f52-b82b-4c22-b639-9989c22fa59e" class="bulleted-list"><li style="list-style-type:square"><strong>버퍼링(Buffering)</strong><ul id="20be642a-4cf3-4d7b-ad57-e3ea428d92fb" class="bulleted-list"><li style="list-style-type:disc">입출력 장치와 보조 기억장치의 처리 속도가 CPU보다 <span style="border-bottom:0.05em solid">느린 문제</span>를 보완하는 방법 중 하나.</li></ul><ul id="d46e5a2d-ede0-4e9f-9210-417cce83467d" class="bulleted-list"><li style="list-style-type:disc">CPU가 하나의 연산을 시작하자마자, 입출력 장치가 다음에 필요한 <span style="border-bottom:0.05em solid">레코드를 미리 읽어서</span> 주기억장치에 <span style="border-bottom:0.05em solid">저장함</span>으로써 CPU의 대기시간 절감.</li></ul></li></ul><ul id="41fbecd8-71b1-4e81-b8dd-ce8ff526c998" class="bulleted-list"><li style="list-style-type:square"><strong>스풀링(Spooling)</strong><ul id="883e19e9-e5c7-4df5-9b32-48aceed9d2e2" class="bulleted-list"><li style="list-style-type:disc">버퍼링과 같은 개념이지만, 스풀링은 디스크를  매우 큰 버퍼처럼 사용.</li></ul></li></ul></li></ul></li></ul><ul id="ca8d6b1a-b0d7-472c-9cf5-53af4061617f" class="bulleted-list"><li style="list-style-type:disc"><strong>파일 관리</strong><ul id="ef5746ff-2daf-46ca-8bf5-45a767b94d21" class="bulleted-list"><li style="list-style-type:circle">파일에 대한 조작, 저장 방식, 접근 방법에 대한 관리 수행. </li></ul></li></ul><p id="603cdb63-d2d2-4e2f-a0b6-a91eecd24ea0" class="">
+</p><hr id="c10306ae-5dc4-4d0b-bf4a-71cffd09fa51"/><p id="1ef85e7e-cdff-4cf8-86f2-c42f3fd204a8" class="">
+</p><p id="568270d3-456f-4670-9be8-a241818c67f0" class="">
+</p></li></ol><ol type="1" id="0ebeb16b-abb1-4901-9f0d-3cdd30bbf25e" class="numbered-list" start="3"><li><strong>운영체제의 기술 발전 흐름</strong><ul id="2915cf94-f86d-48ce-88d5-9210c3812b9c" class="bulleted-list"><li style="list-style-type:disc"><strong>단순 모니터 - 1940년대</strong><ul id="45d65dd5-23cb-4554-b63d-e5b453e45765" class="bulleted-list"><li style="list-style-type:circle">컴퓨터 오퍼레이터가 할 일 자동 수행.</li></ul></li></ul><ul id="405731d9-03a0-430a-8d55-6d6a2d34a933" class="bulleted-list"><li style="list-style-type:disc"><strong>일괄처리 시스템(Batch Processing system) - 1950년대</strong><ul id="2e1fa541-2d55-4940-9920-19535cdeb2d2" class="bulleted-list"><li style="list-style-type:circle">여러 작업을 단일 작업으로 묶어 일괄처리하는 시스템.</li></ul><ul id="f85e453e-1f2b-4052-95b5-ac64db2dc49c" class="bulleted-list"><li style="list-style-type:circle">보조기억장치가 느려 시간이 오래걸림.</li></ul><ul id="d3d0c61c-11a5-4581-bdaf-d64bd91d7888" class="bulleted-list"><li style="list-style-type:circle">이를 보완하기 위해 버퍼링, 스풀링 개념이 도입.</li></ul></li></ul><ul id="e6e40800-cedb-4a4f-8e60-b21208744175" class="bulleted-list"><li style="list-style-type:disc"><strong>다중 프로그래밍 시스템 - 1960년대</strong><ul id="ac9bfc7e-e287-473d-bed1-adaaf0d24bba" class="bulleted-list"><li style="list-style-type:circle">속도차이에 따른 비효율 문제 개선.</li></ul><ul id="d1e48e07-dff1-431d-8e7a-6e30d40eb1b1" class="bulleted-list"><li style="list-style-type:circle">주기억장치 내에 2개 이상의 프로그램을 적재하여 하나가 실행될 경우, 입출력 장치 등의 조작으로 CPU 유휴시간이 발생하면 운영체제가 다른 프로그램을 실행.</li></ul></li></ul><ul id="5d475042-a5bd-4a4a-a297-c3c71f574d83" class="bulleted-list"><li style="list-style-type:disc"><strong>시분할 처리 시스템(TSS : Time-sharing system)</strong><ul id="97c79301-c02f-4f01-9ad2-187345563496" class="bulleted-list"><li style="list-style-type:circle">프로세스의 사용시간을 분할하여 다중 사용자가 CPU를 순환하여 이용.(Time slice)</li></ul></li></ul><ul id="ef612e6f-139b-4bbc-8692-0fb9fd8b4bc3" class="bulleted-list"><li style="list-style-type:disc"><strong>분산 처리 시스템(DPS : Distributed processing system)</strong><ul id="3f802a73-7ebb-4191-b047-f55e7ee9d907" class="bulleted-list"><li style="list-style-type:circle">하나의 대형 컴퓨터에서 처리하던 기능을 지역적, 기능적으로 분담하여 네트워크를 통래 처리.</li></ul><ul id="a9bf0137-6a5a-442f-a44f-e50e0147af56" class="bulleted-list"><li style="list-style-type:circle">목적 :<ol type="1" id="0df3bcde-84c0-476c-bb3d-03a077011e5b" class="numbered-list" start="1"><li><mark class="highlight-purple">자원 공유</mark></li></ol><ol type="1" id="c194e36b-c39c-4f15-9ac3-268ac8908128" class="numbered-list" start="2"><li><mark class="highlight-purple">계산 속도 향상</mark></li></ol><ol type="1" id="70ea9aa1-cf9e-4571-aef0-c3231e665da5" class="numbered-list" start="3"><li><mark class="highlight-purple">신뢰도 향상</mark></li></ol><ol type="1" id="d2a745a8-314b-4d13-8bac-44b0ed96575a" class="numbered-list" start="4"><li><mark class="highlight-purple">통신 기능</mark></li></ol></li></ul></li></ul><ul id="e904ac3a-74ed-4272-b16a-49add1e33c89" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-purple"><strong>다중 처리 시스템(Multiprocessing system)</strong></mark><ul id="a9085328-bc99-4389-870a-8151712af12f" class="bulleted-list"><li style="list-style-type:circle">여러 작업을 하나의 시스템(다수의 CPU)에서 동시 처리가능한 시스템</li></ul><ul id="27426c21-b365-4670-bce4-959878563453" class="bulleted-list"><li style="list-style-type:circle">여러개의 프로세스가 메모리에 저장되어 자원이 할당될 때마다 다시 실행되면서 처리를 완료할 때까지 메모리에 존재하는 시스템.</li></ul></li></ul><ul id="85ff1baf-9c06-48ab-9fb7-cdccbe9c84e7" class="bulleted-list"><li style="list-style-type:disc"><strong>실시간 시스템(Real time system)</strong><ul id="520f0d10-cfd6-4249-aea5-cad54e34bcbf" class="bulleted-list"><li style="list-style-type:circle">제어 대상으로부터 처리 대상이 발생하면 즉시 처리하는 것.</li></ul><ul id="e172aec3-73b8-4f5a-9675-ea5c2f865434" class="bulleted-list"><li style="list-style-type:circle">자료가 발생한 지점에서 단말기(pc)를 통해 직접 입/ 출력되므로 사용자의 노력이 절감된다.</li></ul><ul id="b1826f82-180f-48a0-8aec-db1d97cdbe21" class="bulleted-list"><li style="list-style-type:circle">처리 시간 및 비용이 단축.</li></ul><ul id="513e3bce-99d1-4fd8-b1e5-7199feaa8367" class="bulleted-list"><li style="list-style-type:circle">자료가 무작위로 도착하기 때문에 입/출력 자료의 일시저장과 대기 필요.<ul id="702bebda-e4c1-4f07-9024-f7ddfb9afd7b" class="bulleted-list"><li style="list-style-type:square"><strong>경성</strong> : 작업의 실행 시작이나 완료에 대한 시간 제약조건을 지키지 못하는 경우 시스템에 치명적인 영향을 주는 시스템.</li></ul><ul id="8ec94c99-7c9d-4eb1-a04c-24e5a9f77fe8" class="bulleted-list"><li style="list-style-type:square"><strong>연성</strong> : 작업실행에 대한 시간 제약이 있지만, 이를 지키지 못하더라도 전체 시스템에 큰 영향을 끼치지 않는 시스템</li></ul></li></ul></li></ul><p id="b4ee48de-c10c-4fb1-adea-bfbc1df56029" class="">
+</p><hr id="aa8234d1-7793-4109-8550-388ae4c1074c"/><p id="a4760f27-7e87-4932-b82c-19bea1c1ada1" class="">
+</p><p id="203b6f35-9fa6-4ab7-87f6-b3e8a3ad263f" class="">
+</p></li></ol><ol type="1" id="2f47985e-11af-4fad-803e-7485a1194a7f" class="numbered-list" start="4"><li><strong>운영체제의 주요 구성 기술</strong><ul id="dd8bbc80-f0c9-423f-8956-000050d92597" class="bulleted-list"><li style="list-style-type:disc"><strong>프로세스 관리</strong><ul id="e322c4f8-bba7-4d77-81bb-f196204c3bc3" class="bulleted-list"><li style="list-style-type:circle"><strong>프로세스</strong><ul id="6ed70e4b-0296-4c49-9a09-a8929952c3e9" class="bulleted-list"><li style="list-style-type:square">현재 수행 상태에 있는 프로그램.</li></ul><ul id="f3b0b73f-6144-4cfb-8236-d4a5415df178" class="bulleted-list"><li style="list-style-type:square">여러 명령어, 데이터, 카운터, CPU 레지스터, 루틴인자, 복귀주소, 변수 등 데이터 스택 포함.</li></ul></li></ul><ul id="337fa0c6-8be0-4584-87fa-0a7256ec753f" class="bulleted-list"><li style="list-style-type:circle"><strong>프로세스의 상태 변화</strong><ul id="7da82287-06d5-49e0-a37f-19a63f932d95" class="bulleted-list"><li style="list-style-type:square"><strong>생성(New) :</strong><ul id="53bdc682-6135-4880-a437-01728371bcc0" class="bulleted-list"><li style="list-style-type:disc">새로 만들어졌지만, 운영체제에 의해 실행 가능한 프로세스 집합에 포함되지 않은 상태.</li></ul></li></ul><ul id="b7b36a6a-aaac-47e9-b8b1-0bd7920d50f3" class="bulleted-list"><li style="list-style-type:square"><strong>준비(Ready) :</strong><ul id="f1b03d16-7678-4d02-813f-91eb6a5d31ed" class="bulleted-list"><li style="list-style-type:disc">프로세스가 실행되고 있지 않지만 즉시 CPU를 사용할 수 있고 사용을 기다리는 상태.</li></ul></li></ul><ul id="5b323161-f5f4-4c6f-bfaa-17a5e5197791" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-purple"><strong>실행(Running) </strong></mark><strong>: </strong><ul id="0906a4cd-f23f-4d78-ac31-924dc432dc06" class="bulleted-list"><li style="list-style-type:disc">현재 CPU를 차지하여 동작중인 상태.</li></ul></li></ul><ul id="19febef5-bd3b-4b4f-a401-dbe31cc57eb9" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-purple"><strong>대기(Block / Nating) </strong></mark><strong>:</strong><ul id="ccf5b609-5230-438b-9249-ef48cd346e73" class="bulleted-list"><li style="list-style-type:disc">어떤 사건이 발생하기 전까지 실행될 수 없는 상태.</li></ul></li></ul><ul id="5ab31757-348d-4588-9e8e-aa9e07b58fa0" class="bulleted-list"><li style="list-style-type:square"><mark class="highlight-purple"><strong>보류(Hold / Terminated)</strong></mark><strong> :</strong><ul id="8aa558fe-02f0-4082-b5e7-872b30e951ec" class="bulleted-list"><li style="list-style-type:disc">프로세스가 디스크 등에 보관되어 있는 상태.</li></ul></li></ul><ul id="591091e8-88ca-484f-99d4-97368b07468e" class="bulleted-list"><li style="list-style-type:square"><strong>교착(Deadlock / Suspend) :</strong><ul id="9863790f-e7ae-47a4-ac0f-9faf703095a6" class="bulleted-list"><li style="list-style-type:disc">결코 발생할 수 없는 사건을 기다리는 상태.</li></ul></li></ul><ul id="93e52df2-b690-48ac-9110-9e8cd87ee2fe" class="bulleted-list"><li style="list-style-type:square"><strong>종료(Exit) :</strong><ul id="60555acf-27e6-411a-bfab-12a0b5809516" class="bulleted-list"><li style="list-style-type:disc">운영체제에 의해 프로세스 집합에서 해제된 상태.</li></ul><p id="3a77305e-bd88-4112-9219-ad00ee797618" class="">
+</p></li></ul></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="941d8e4a-7af0-4e8b-96a2-787e50f057d9"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Text 영역</strong>: 프로그램 명령 코드 자체를 저장하는 메모리 영역으로, Hex(16진수) 파일이나 BIN(2진수) 파일이 저장되는 영역.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="a267b397-8e6e-47c8-a691-e7370c571aef"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Data 영역</strong>: 전역변수, 정적변수, 배열, 구조체 등이 저장되는 영역</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="3ef97580-39e8-4c61-9d73-47f10ce93294"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Heap 영역</strong>: malloc(), new() 같은 동적인 메모리를 할당할 때 위치하는 메모리 영역.</div></figure><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="fdbf2741-cadc-40a6-900b-50da51517073"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%"><strong>Stack 영역</strong>: 지역변수, 매개변수, 리턴값 등 잠시 사용되었다가 사라지는 임시 데이터를 저장하는 영역. </div></figure><p id="c11dc68f-8005-4436-b986-40a0e5d22927" class="">
+</p><ul id="a77cc778-7483-4f18-866e-841c69a9d756" class="bulleted-list"><li style="list-style-type:circle"><strong>프로세스 제어 블록(PCB)</strong><ul id="8eb7d164-593d-409a-8393-ec872dcee50a" class="bulleted-list"><li style="list-style-type:square">운영체제가 프로세스에 대한 중요한 정보를 저장한 저장소.</li></ul><ul id="915839fd-ae3a-4a2a-af6e-00009d9c7bb2" class="bulleted-list"><li style="list-style-type:square">운영체제는 프로세스의 실행 중단 시, 중단 후 재실행 시 등의 경우에 PCB 참조.</li></ul></li></ul><ul id="8fc4393a-e9f8-425e-a259-ffd6d03c9afe" class="bulleted-list"><li style="list-style-type:circle"><strong>쓰레드 &amp; 태스크(Thread &amp; Task)</strong><ul id="d48274eb-89d3-4d2c-a5ef-1f6a04f166ba" class="bulleted-list"><li style="list-style-type:square"><strong>쓰레드</strong> : 프로세스를 수행하는 데 필요한 가능한 많은 하위 작업들 중 하나.</li></ul><ul id="73b387fc-a91d-433e-88ea-f98aed90c0e2" class="bulleted-list"><li style="list-style-type:square"><strong>태스크 </strong>: 자원 할당의 단위로 프로세스와 유사한 개념.</li></ul><ul id="6352c163-fe22-415a-8dcf-738197d3da94" class="bulleted-list"><li style="list-style-type:square">ex) 스케줄러 → 태스크를 수행하는 가장 작은 단위가 쓰레드 </li></ul><ul id="c15a3dd7-adba-4ca9-807d-4d4b13e1db87" class="bulleted-list"><li style="list-style-type:square">프로세스 : 쓰레드의 집합체.</li></ul></li></ul><ul id="8055e642-261a-4007-8a1c-38c50064f209" class="bulleted-list"><li style="list-style-type:circle"><strong>프로세스 스케줄링 → (우선순위 결정.)</strong><ul id="ee064cde-9ef5-4b5a-8a2a-59a15c850ab8" class="bulleted-list"><li style="list-style-type:square">멀티 프로세스에서는 CPU를 사용하는 프로세스 결정이 문제.</li></ul><ul id="f2fa29cb-f287-4197-96d2-2f04ddb17796" class="bulleted-list"><li style="list-style-type:square">스와핑 : 메모리에서 프로세스를 제거하는 것이 효율적인 경우, 프로세스를 제거하였다가, 차후 이 프로세스를 다시 호출하여 중단되었던 지점부터 재개하는 것.</li></ul></li></ul><figure class="block-color-gray_background callout" style="white-space:pre-wrap;display:flex" id="cd3757f9-2a4a-4d34-9cbe-4b866d448b55"><div style="font-size:1.5em"><span class="icon">💡</span></div><div style="width:100%">스케줄링 → 오버헤드, 응답시간, 반환시간, 대기시간 등을 최소화 시키기 위함.<ol type="1" id="deabc878-70fd-491b-97d4-573821490fbe" class="numbered-list" start="1"><li><strong>장기 스케줄링</strong> : 어떤 프로세스를 커널에 등록할 것인가를 결정하는 경우.</li></ol><ol type="1" id="54228e36-5cd9-4084-ba34-d0ffaf549eaa" class="numbered-list" start="2"><li><strong>중기 스케줄링</strong> : 어떤 프로세스를 메모리에 할당할 것인지 결정하는 경우.</li></ol><ol type="1" id="c1b3ff16-dc17-4303-ab02-e6ea6465738a" class="numbered-list" start="3"><li><strong>단기 스케줄링</strong> : 어떤 프로세스를 CPU에 할당할 것인지 결정하는 경우.</li></ol></div></figure></li></ul><ul id="0ab49394-058e-4879-b9c4-603010475aab" class="bulleted-list"><li style="list-style-type:disc"><strong>스케줄링 및 알고리즘</strong><ul id="5127bcc9-689b-4551-9add-9ffc44846acc" class="bulleted-list"><li style="list-style-type:circle"><strong>선점 스케줄링 : </strong><ul id="3a7b86f7-1aa9-49c3-acdb-d375ff905eba" class="bulleted-list"><li style="list-style-type:square">다른 프로세스가 선점 가능.</li></ul><ul id="cfa2b722-0b7c-444b-b350-d0588b45e7ae" class="bulleted-list"><li style="list-style-type:square">RR, SRT, MFQ</li></ul></li></ul><ul id="e4d671e1-64fc-44c8-84b8-54d965179e5d" class="bulleted-list"><li style="list-style-type:circle"><strong>비선점 스케줄링 :</strong><ul id="3e7936d4-66c8-4547-b2fe-4725fa5d1206" class="bulleted-list"><li style="list-style-type:square">한 프로세스가 끝날 때까지 선점 불가.</li></ul><ul id="77ea9648-f13c-4a11-a945-4df7d6fbc6d7" class="bulleted-list"><li style="list-style-type:square">SJF, FIFO, HRU</li></ul></li></ul><p id="f145a045-a784-4400-9625-756574f2ae7f" class="">
+</p></li></ul><ol type="1" id="92a0958f-b53f-4a3d-97a5-59a309565c66" class="numbered-list" start="1"><li>FIFO :<ol type="a" id="0e2f5b26-03d1-4569-b10b-30c089027ed0" class="numbered-list" start="1"><li>FCFS 라고도 함.</li></ol><ol type="a" id="a8227178-7621-41ad-981c-e76d0df7eedc" class="numbered-list" start="2"><li>First Come First Served</li></ol></li></ol><ol type="1" id="2988aab4-5d79-495d-bf6b-fceab75f9bbc" class="numbered-list" start="2"><li>SJF :<ol type="a" id="09027856-c760-4459-93c2-a302cba3d3a3" class="numbered-list" start="1"><li>최소작업 우선 스케줄링</li></ol><ol type="a" id="3d6600c3-ec3e-4527-aede-ff37d538b614" class="numbered-list" start="2"><li> 각 작업의 실행 시간을 이용하여 실행 시간이 가장 짧은 작업에 할당하는 방법이다.</li></ol></li></ol><ol type="1" id="6fda6321-ca51-43d4-a3a9-01d31154ef3e" class="numbered-list" start="3"><li>SRT :<ol type="a" id="9c3c89a2-6cad-4939-956c-4841673fc438" class="numbered-list" start="1"><li>Shortest Remaining Time</li></ol><ol type="a" id="3eea4999-c569-40fe-821f-c9389b15a7d1" class="numbered-list" start="2"><li>진행 중인 프로세스가 있어도  sleep시키고 최단 잔여시간 프로세스를 먼저 할당한다.</li></ol></li></ol><ol type="1" id="1c9e3ae1-74fe-46ce-a981-c30e18a5e2aa" class="numbered-list" start="4"><li>Priority<ol type="a" id="00ba9427-78e0-4b32-a65a-01a168abfffd" class="numbered-list" start="1"><li>Idenfinite Blocking :<ol type="i" id="ee0a1158-8eea-4478-9184-30be6b161e39" class="numbered-list" start="1"><li>무기한 봉쇄.</li></ol><ol type="i" id="e35fc07e-0b56-4aa7-9d35-ec02b810158e" class="numbered-list" start="2"><li>실행 준비는 되어있으나 CPU를 사용하지 못하는 프로세스를 CPU가 무기한 대기하는 상태.</li></ol></li></ol><ol type="a" id="f657d848-149f-4f80-9afe-7e6bf9cd2b83" class="numbered-list" start="2"><li>Starvation :<ol type="i" id="43dfb77f-c485-48a0-8ea4-d651e1c154db" class="numbered-list" start="1"><li>기아 상태.</li></ol><ol type="i" id="ed62bfdd-9e32-40d3-942c-8412e57f4f0a" class="numbered-list" start="2"><li>특정 자원 목록에 대해 권한을 얻지 못해 영원히 얻지 못하여 자신의 일을 하지 못하는 상태.</li></ol></li></ol></li></ol><ol type="1" id="da769ed8-2052-41cc-a619-5e3f326beb1e" class="numbered-list" start="5"><li>Round-Robin :<ol type="a" id="645f0c36-58df-4658-9787-6120364b63fb" class="numbered-list" start="1"><li>cpu 사용시간이 랜덤한 프로세스들이 섞여 있을 때 유용.</li></ol><ol type="a" id="9922522a-c339-45d5-b2d5-623b10d967b9" class="numbered-list" start="2"><li>응답시간이 빨라짐.</li></ol><ol type="a" id="109d5662-a21a-46c9-a2b4-373d59bf0e72" class="numbered-list" start="3"><li>공정한 스케줄링.</li></ol><ol type="a" id="5fbf19a2-b5ec-4e45-8015-c77524afab73" class="numbered-list" start="4"><li>프로세스들 사이에 우선순위를 두지 않고, 순서대로 시간단위로 CPU를 할당하는 방식.</li></ol></li></ol><ol type="1" id="1058d36b-6f1a-47a3-b40f-1a88b67cf828" class="numbered-list" start="6"><li>Multileval Feedback :<ol type="a" id="0605781c-bdb5-4958-82d4-378d78bad798" class="numbered-list" start="1"><li>다단계 큐 스케줄링</li></ol><ol type="a" id="948e054e-7a6a-4349-8706-3e736266e137" class="numbered-list" start="2"><li>커널 내의 준비 큐를 여러 개의 큐로 분리하여 큐 사이에 우선순위를 부여하는 스케줄링.</li></ol></li></ol></li></ol><p id="2fa91225-c146-4eda-a512-7c174e54429e" class="">
+</p><p id="3aa09281-59c7-42b0-a4e4-19f7f7a54898" class="">
+</p><p id="830d168c-8117-4d52-8e15-9d46bde11d67" class="">
+</p><p id="90b44a77-8a4e-41c0-93ea-ed057da40dd8" class="">
+</p><p id="560fb548-e5ff-4dc3-bc44-ee4ec4d9cad7" class="">‏‏‎ ‎</p><p id="5272ca43-ff5b-4ae0-82eb-c80923ee294a" class="">‏‏‎ ‎</p><p id="9bf6e8da-60f1-4eb6-a5b6-41e899b52ffc" class="">‏‏‎ ‎</p><p id="4fa12644-a368-408d-8088-6e4a9587d6a7" class="">
+</p><p id="f763d940-9563-46b9-b5ce-0880020458b7" class="">
+</p><p id="5b4876a0-5dda-4b45-beb5-1db490dd4aab" class="">
+</p></div></article></body></html>
